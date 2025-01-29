@@ -16,11 +16,14 @@ public class EstudianteService implements InterfaceEstudianteService {
 
     @Override
     public void agregarEstudiantes(Estudiante estudiante) throws Exception{
-        this.buscarEstudiante(estudiante);
+       if ( this.buscarEstudiante(estudiante) !=null){
+           throw new Exception("Error");
+       }
         estudiantes.add(estudiante);
     }
+    // throws se pone porque el metodo buscar estudiante devuelve una exeption
 
-    private Estudiante buscarEstudiante(Estudiante estudiante) throws Exception {
+    private Estudiante buscarEstudiante(Estudiante estudiante) {
         Estudiante estudianteEncontrado= null;
         int pos=0;
         while (pos<estudiantes.size() &&  estudianteEncontrado==null ){
@@ -29,10 +32,6 @@ public class EstudianteService implements InterfaceEstudianteService {
             }
             pos++;
         }
-        if(estudianteEncontrado != null) {
-            throw new Exception("Error");
-        }
         return estudianteEncontrado;
     }
-
 }
